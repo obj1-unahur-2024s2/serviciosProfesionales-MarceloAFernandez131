@@ -1,9 +1,34 @@
-import example.pepita
+import serviciosProfesionales.*
 
-describe "group of tests for pepita" {
+describe "name" {
+  const unahur = new Universidad(provincia = "BuenosAires", honorarios = 15000)
+  const rosario = new Universidad(provincia = "SantaFe", honorarios = 12000)
+  const asociado1 = new AsociadoAUniversidad(universidad = unahur)
+  const asociado2 = new AsociadoAUniversidad(universidad = rosario)
+  const asociadoLitoral = new AsociadosAlLitoral(universidad = rosario)
+  const libre1 = new Libres(universidad = unahur)
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+
+  
+  test "Asociado a unahur" {
+    assert.equals(15000, asociado1.honorarios())
+    assert.equals(["BuenosAires"], asociado1.puedeTrabajar())
   }
 
+  test "Asociado a rosario" {
+    assert.equals(12000, asociado2.honorarios())
+    assert.equals(["SantaFe"], asociado2.puedeTrabajar())
+  }
+
+  test "Asociado al litoral" {
+    assert.equals(3000, asociadoLitoral.honorarios())
+    assert.equals(["EntreRios","SantaFe","Corrientes"], asociadoLitoral.puedeTrabajar())
+  }
+
+  test "Libre" {
+    assert.equals(12000, libre1.honorarios())
+    assert.equals(["SantaFe"], libre1.puedeTrabajar())
+  }
 }
+
+
